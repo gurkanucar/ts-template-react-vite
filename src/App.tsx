@@ -1,35 +1,28 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import HelloPage from "./pages/HelloPage";
+import useTheme from "./util/ThemeChanger";
 
 function App() {
-  const [count, setCount] = useState(0);
-
+  const { theme, toggleTheme } = useTheme("light");
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className={`h-screen ${theme === "dark" ? "dark" : ""}`}>
+        <h1 className="font-nunito text-3xl text-primary font-bold dark:text-white">
+          Vite + React!
+        </h1>
+        <div className="card bg-white dark:bg-gray-800 rounded">
+          <div className="text-black dark:text-white">
+            Current theme: {theme}
+          </div>
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded dark:bg-yellow-500 dark:hover:bg-yellow-700"
+            onClick={toggleTheme}
+          >
+            Toggle Theme
+          </button>
+          <HelloPage />
+        </div>
       </div>
-      <h1 className="font-nunito text-3xl text-primary font-bold underline">
-        Vite + React!
-      </h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }
