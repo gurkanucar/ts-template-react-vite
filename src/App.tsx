@@ -1,5 +1,6 @@
 import "./App.css";
 import HelloPage from "./pages/HelloPage";
+import UserPage from "./pages/userPage/UserPage";
 import useTheme from "./util/ThemeChanger";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           </button>
           <HelloPage />
         </div>
+        <UserPage />
       </div>
     </>
   );

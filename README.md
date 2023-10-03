@@ -3,7 +3,8 @@ pnpm i```
 
 # tailwind
 ```pnpm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p```
+npx tailwindcss init -p
+pnpm install --save-dev sass```
 
 # type alias
 

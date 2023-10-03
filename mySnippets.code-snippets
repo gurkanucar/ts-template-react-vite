@@ -90,5 +90,13 @@
 			"export default ${TM_FILENAME_BASE}Page"
 		],
 		"description": "create a new next typescript page"
+	},
+	{
+		"imss": {
+			"scope": "typescriptreact , javascriptreact",
+			"prefix": "imss",
+			"body": ["import styles from './${TM_FILENAME_BASE}.module.scss'"],
+			"description": "create a new typescript component with interface"
+		}
 	}
 }
