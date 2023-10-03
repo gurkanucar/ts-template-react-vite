@@ -10,6 +10,16 @@ npx tailwindcss init -p```
 ```pnpm i @types/node -D
 ```
 
+# redux toolkit
+```pnpm i react-redux @reduxjs/toolkit```
+
+indent rainbow
+jest runner
+env | jakka 
+random everything
+svg preview
+pretty typescript errors
+polocode
 Auto Close Tag
 Auto Rename Tag
 Rainbow Brackets
