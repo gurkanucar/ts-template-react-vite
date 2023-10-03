@@ -1,7 +1,9 @@
-pnpm create vite
-pnpm i
+````pnpm create vite
+pnpm i```
 
-
+# tailwind
+```pnpm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p```
 
 
 Auto Close Tag
@@ -19,3 +21,4 @@ Pretier
 SCSS Formatter
 SCSS IntelliSense
 Tailwind CSS IntelliSense
+````
