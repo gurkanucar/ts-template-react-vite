@@ -5,6 +5,10 @@ pnpm i```
 ```pnpm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p```
 
+# type alias
+
+```pnpm i @types/node -D
+```
 
 Auto Close Tag
 Auto Rename Tag
