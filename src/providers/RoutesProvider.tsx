@@ -1,6 +1,4 @@
-import NotFoundPage from "@/pages/NotFoundPage";
-import UserPage from "@/pages/userPage/UserPage";
-import { FC, PropsWithChildren } from "react";
+import React, { FC, PropsWithChildren, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -8,6 +6,9 @@ import {
   Navigate,
 } from "react-router-dom";
 import { useTypedSelector } from "@/hooks/useSelector";
+
+const UserPage = React.lazy(() => import("@/pages/userPage/UserPage"));
+const NotFoundPage = React.lazy(() => import("@/pages/NotFoundPage"));
 
 const routes = [
   {
@@ -32,25 +33,29 @@ const RoutesProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
 
   return (
     <Router>
-      <Routes>
-        {routes.map((route, index) => (
-          <Route
-            key={index}
-            path={route.path}
-            element={
-              !route.isPublic && !auth.isLoggedIn ? (
-                <Navigate to="/login" replace />
-              ) : (
-                <>
-                  <route.component />
-                  {auth.isLoggedIn && children}
-                </>
-              )
-            }
-          />
-        ))}
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          {routes.map((route, index) => (
+            <Route
+              key={index}
+              path={route.path}
+              element={
+                !route.isPublic && !auth.isLoggedIn ? (
+                  <Navigate to="/login" replace />
+                ) : (
+                  <>
+                    <React.Suspense fallback={<div>Loading...</div>}>
+                      <route.component />
+                    </React.Suspense>
+                    {auth.isLoggedIn && children}
+                  </>
+                )
+              }
+            />
+          ))}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
     </Router>
   );
 };
