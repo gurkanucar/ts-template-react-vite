@@ -6,8 +6,20 @@ import {
   Navigate,
 } from "react-router-dom";
 import { useTypedSelector } from "@/hooks/useSelector";
+import LoadingSpinner from "./LoadingSpinner";
 
-const UserPage = React.lazy(() => import("@/pages/userPage/UserPage"));
+// const UserPage = React.lazy(() => import("@/pages/userPage/UserPage"));
+const UserPage = React.lazy(() =>
+  new Promise<{ default: React.ComponentType }>(resolve =>
+    setTimeout(() => {
+      import("@/pages/userPage/UserPage")
+        .then(module => resolve({ default: module.default }))
+    }, 2000)
+  )
+);
+
+
+
 const NotFoundPage = React.lazy(() => import("@/pages/NotFoundPage"));
 
 const routes = [
@@ -28,34 +40,34 @@ const routes = [
   },
 ];
 
+// const LoadingSpinner = () => <div>Loading...</div>;
+
 const RoutesProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
   const auth = useTypedSelector((state) => state.auth);
 
   return (
     <Router>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          {routes.map((route, index) => (
-            <Route
-              key={index}
-              path={route.path}
-              element={
-                !route.isPublic && !auth.isLoggedIn ? (
-                  <Navigate to="/login" replace />
-                ) : (
-                  <>
-                    <React.Suspense fallback={<div>Loading...</div>}>
-                      <route.component />
-                    </React.Suspense>
-                    {auth.isLoggedIn && children}
-                  </>
-                )
-              }
-            />
-          ))}
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </Suspense>
+      <Routes>
+        <Route path="*" element={<NotFoundPage />} />
+        {routes.map((route, index) => (
+          <Route
+            key={index}
+            path={route.path}
+            element={
+              !route.isPublic && !auth.isLoggedIn ? (
+                <Navigate to="/login" replace />
+              ) : (
+                <>
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <route.component />
+                  </Suspense>
+                  {auth.isLoggedIn && children}
+                </>
+              )
+            }
+          />
+        ))}
+      </Routes>
     </Router>
   );
 };
