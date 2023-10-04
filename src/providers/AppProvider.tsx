@@ -1,15 +1,16 @@
 import { FC, PropsWithChildren, Suspense } from "react";
 import { Provider } from "react-redux";
-
-// Tailwind css
 import "@/util/tailwind.css";
 import store from "@/store/store";
+import RoutesProvider from "./RoutesProvider";
 
 const AppProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
   return (
-    <Suspense>
-      <Provider store={store}>{children}</Provider>
-    </Suspense>
+    <Provider store={store}>
+      <Suspense>
+        <RoutesProvider>{children}</RoutesProvider>
+      </Suspense>
+    </Provider>
   );
 };
 
