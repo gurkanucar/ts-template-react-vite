@@ -49,12 +49,17 @@ const router = createBrowserRouter([
         element: <PrivateRoute />,
         children: [
           {
-            path: "private1",
-            element: <PrivatePage1 />,
-          },
-          {
-            path: "private2",
-            element: <PrivatePage2 />,
+            element: <Navbar />,
+            children: [
+              {
+                path: "private1",
+                element: <PrivatePage1 />,
+              },
+              {
+                path: "private2",
+                element: <PrivatePage2 />,
+              },
+            ],
           },
         ],
       },
