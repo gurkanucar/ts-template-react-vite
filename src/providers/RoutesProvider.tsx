@@ -3,30 +3,20 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // It seems you have a typo in your second code. I'm keeping the original name.
 
 // Lazy load components
-const PublicPage1 = React.lazy(
-  () =>
-    new Promise<{ default: React.ComponentType }>((resolve) =>
-      setTimeout(() => {
-        import("@/pages/PublicPage1").then((module) =>
-          resolve({ default: module.default })
-        );
-      }, 2000)
-    )
-);
-const PrivatePage1 = React.lazy(
-  () =>
-    new Promise<{ default: React.ComponentType }>((resolve) =>
-      setTimeout(() => {
-        import("@/pages/PrivatePage1").then((module) =>
-          resolve({ default: module.default })
-        );
-      }, 2000)
-    )
-);
+// const PublicPage1 = React.lazy(
+//   () =>
+//     new Promise<{ default: React.ComponentType }>((resolve) =>
+//       setTimeout(() => {
+//         import("@/pages/PublicPage1").then((module) =>
+//           resolve({ default: module.default })
+//         );
+//       }, 2000)
+//     )
+// );
 
-//const PublicPage1 = lazy(() => import("@/pages/PublicPage1"));
+const PublicPage1 = lazy(() => import("@/pages/PublicPage1"));
 const PublicPage2 = lazy(() => import("@/pages/PublicPage2"));
-//const PrivatePage1 = lazy(() => import("@/pages/PrivatePage1"));
+const PrivatePage1 = lazy(() => import("@/pages/PrivatePage1"));
 const PrivatePage2 = lazy(() => import("@/pages/PrivatePage2"));
 const LoginPage = lazy(() => import("@/pages/LoginPage"));
 const HelloPage = lazy(() => import("@/pages/HelloPage"));
@@ -35,7 +25,7 @@ const PrivateRoute = lazy(() => import("@/providers/PrivateRoute"));
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "",
     children: [
       {
         path: "/",
@@ -74,8 +64,8 @@ const router = createBrowserRouter([
   },
 ]);
 
-function RoutesProvider() {
+const RoutesProvider = () => {
   return <RouterProvider router={router} />;
-}
+};
 
 export default RoutesProvider;
