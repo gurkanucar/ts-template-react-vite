@@ -1,6 +1,6 @@
-import React, { lazy } from "react";
+import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// It seems you have a typo in your second code. I'm keeping the original name.
+import "./styles.css";
 
 // Lazy load components
 // const PublicPage1 = React.lazy(
