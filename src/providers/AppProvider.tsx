@@ -3,12 +3,13 @@ import { Provider } from "react-redux";
 import "@/util/tailwind.css";
 import store from "@/store/store";
 import RoutesProvider from "./RoutesProvider";
+import LoadingSpinner from "./LoadingSpinner";
 
-const AppProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
+const AppProvider: FC<PropsWithChildren<unknown>> = () => {
   return (
     <Provider store={store}>
-      <Suspense>
-        <RoutesProvider>{children}</RoutesProvider>
+      <Suspense fallback={<LoadingSpinner />}>
+        <RoutesProvider />
       </Suspense>
     </Provider>
   );
